@@ -1,0 +1,22 @@
+
+User-agent: *
+Allow: /
+
+# XML Sitemap
+Sitemap: https://nayantaratrust.in/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /writable/
+Disallow: /app/
+Disallow: /system/
+
+# Allow important pages
+Allow: /
+Allow: /beneficiaries
+Allow: /success-stories
+Allow: /join-us
+Allow: /founders-members
+Allow: /media
+Allow: /ngo-works
+Allow: /hi/
