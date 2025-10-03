@@ -20,17 +20,17 @@
                 <div class="col-md-6">
                     <h6 class="text-primary mb-3"><i class="fas fa-user"></i> Personal Details</h6>
 
-                    
+
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name" 
+                        <input type="text" class="form-control" id="name" name="name"
                                value="<?= esc($beneficiary['name']) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="age" class="form-label">Age</label>
-                        <input type="number" class="form-control" id="age" name="age" 
+                        <input type="number" class="form-control" id="age" name="age"
                                value="<?= esc($beneficiary['age']) ?>">
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 
                     <div class="mb-3">
                         <label for="course" class="form-label">Course <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="course" name="course" 
+                        <input type="text" class="form-control" id="course" name="course"
                                value="<?= esc($beneficiary['course']) ?>" required>
                     </div>
                 </div>
@@ -62,13 +62,13 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="institution" class="form-label">Institution <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="institution" name="institution" 
+                        <input type="text" class="form-control" id="institution" name="institution"
                                value="<?= esc($beneficiary['institution']) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" name="city" 
+                        <input type="text" class="form-control" id="city" name="city"
                                value="<?= esc($beneficiary['city']) ?>">
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control" id="state" name="state" 
+                        <input type="text" class="form-control" id="state" name="state"
                                value="<?= esc($beneficiary['state']) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phone" name="phone" 
+                        <input type="text" class="form-control" id="phone" name="phone"
                                value="<?= esc($beneficiary['phone'] ?? '') ?>">
                     </div>
                 </div>
@@ -92,13 +92,13 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" 
+                        <input type="email" class="form-control" id="email" name="email"
                                value="<?= esc($beneficiary['email'] ?? '') ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="linkedin_url" class="form-label">LinkedIn URL</label>
-                        <input type="url" class="form-control" id="linkedin_url" name="linkedin_url" 
+                        <input type="url" class="form-control" id="linkedin_url" name="linkedin_url"
                                value="<?= esc($beneficiary['linkedin_url'] ?? '') ?>">
                     </div>
                 </div>
@@ -106,13 +106,13 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="company_name" class="form-label">Company Name</label>
-                        <input type="text" class="form-control" id="company_name" name="company_name" 
+                        <input type="text" class="form-control" id="company_name" name="company_name"
                                value="<?= esc($beneficiary['company_name'] ?? '') ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="company_link" class="form-label">Company Link</label>
-                        <input type="url" class="form-control" id="company_link" name="company_link" 
+                        <input type="url" class="form-control" id="company_link" name="company_link"
                                value="<?= esc($beneficiary['company_link'] ?? '') ?>">
                     </div>
 

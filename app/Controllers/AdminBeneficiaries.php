@@ -70,13 +70,14 @@ class AdminBeneficiaries extends BaseController
         // Handle image upload
         $image = $this->request->getFile('image');
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $uploadPath = WRITEPATH . 'uploads/beneficiaries';
+            $uploadPath = FCPATH . 'uploads/beneficiaries';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0755, true);
             }
             $newName = $image->getRandomName();
             $image->move($uploadPath, $newName);
             $data['image'] = $newName;
+            log_message('info', 'Image uploaded successfully: ' . $newName);
         }
 
         if ($this->beneficiaryModel->insert($data)) {
@@ -152,16 +153,18 @@ class AdminBeneficiaries extends BaseController
         $image = $this->request->getFile('image');
         if ($image && $image->isValid() && !$image->hasMoved()) {
             $newName = $image->getRandomName();
-            if (!is_dir(WRITEPATH . 'uploads/beneficiaries')) {
-                mkdir(WRITEPATH . 'uploads/beneficiaries', 0755, true);
+            $uploadPath = FCPATH . 'uploads/beneficiaries';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
             }
-            $image->move(WRITEPATH . 'uploads/beneficiaries', $newName);
+            $image->move($uploadPath, $newName);
             $data['image'] = $newName;
 
             // Delete old image if exists
-            if (!empty($beneficiary['image']) && file_exists(WRITEPATH . 'uploads/beneficiaries/' . $beneficiary['image'])) {
-                unlink(WRITEPATH . 'uploads/beneficiaries/' . $beneficiary['image']);
+            if (!empty($beneficiary['image']) && file_exists(FCPATH . 'uploads/beneficiaries/' . $beneficiary['image'])) {
+                unlink(FCPATH . 'uploads/beneficiaries/' . $beneficiary['image']);
             }
+            log_message('info', 'Image updated successfully: ' . $newName);
         }
 
         if ($this->beneficiaryModel->update($id, $data)) {
