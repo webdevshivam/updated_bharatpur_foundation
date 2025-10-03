@@ -70,11 +70,12 @@ class AdminBeneficiaries extends BaseController
         // Handle image upload
         $image = $this->request->getFile('image');
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            if (!is_dir(WRITEPATH . 'uploads/beneficiaries')) {
-                mkdir(WRITEPATH . 'uploads/beneficiaries', 0755, true);
+            $uploadPath = WRITEPATH . 'uploads/beneficiaries';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
             }
-            $image->move(WRITEPATH . 'uploads/beneficiaries', $newName);
+            $newName = $image->getRandomName();
+            $image->move($uploadPath, $newName);
             $data['image'] = $newName;
         }
 

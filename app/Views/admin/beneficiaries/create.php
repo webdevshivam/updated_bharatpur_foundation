@@ -14,7 +14,7 @@
         <h5 class="mb-0"><i class="fas fa-user-plus"></i> Beneficiary Information</h5>
     </div>
     <div class="card-body">
-        <form action="<?= base_url('admin/beneficiaries/store') ?>" method="post">
+        <form action="<?= base_url('admin/beneficiaries/store') ?>" method="post" enctype="multipart/form-data">
             <div class="row">
                 <!-- Basic Information -->
                 <div class="col-md-6">

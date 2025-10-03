@@ -47,6 +47,20 @@ $routes->group('admin', function($routes) {
         $routes->post('store', 'AdminBeneficiaries::store');
         $routes->get('view/(:num)', 'AdminBeneficiaries::view/$1');
         $routes->get('edit/(:num)', 'AdminBeneficiaries::edit/$1');
+
+
+// Route to serve uploaded beneficiary images
+$routes->get('writable/uploads/beneficiaries/(:any)', function($filename) {
+    $filepath = WRITEPATH . 'uploads/beneficiaries/' . $filename;
+    if (file_exists($filepath)) {
+        header('Content-Type: ' . mime_content_type($filepath));
+        header('Content-Length: ' . filesize($filepath));
+        readfile($filepath);
+        exit;
+    }
+    throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+});
+
         $routes->post('update/(:num)', 'AdminBeneficiaries::update/$1');
         $routes->get('delete/(:num)', 'AdminBeneficiaries::delete/$1');
         $routes->post('delete-multiple', 'AdminBeneficiaries::deleteMultiple');

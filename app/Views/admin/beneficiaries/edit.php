@@ -14,7 +14,7 @@
         <h5 class="mb-0"><i class="fas fa-user-edit"></i> Update Beneficiary Information</h5>
     </div>
     <div class="card-body">
-        <form action="<?= base_url('admin/beneficiaries/update/' . $beneficiary['id']) ?>" method="post">
+        <form action="<?= base_url('admin/beneficiaries/update/' . $beneficiary['id']) ?>" method="post" enctype="multipart/form-data">
             <div class="row">
                 <!-- Basic Information -->
                 <div class="col-md-6">

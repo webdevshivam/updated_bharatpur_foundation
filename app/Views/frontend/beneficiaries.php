@@ -112,10 +112,11 @@
                             <div class="flex flex-col items-center text-center">
                                 <!-- Profile Image -->
                                 <div class="w-24 h-24 rounded-3xl overflow-hidden bg-<?= $beneficiary['is_passout'] ? 'emerald' : 'indigo' ?>-100 flex-shrink-0 ring-4 ring-white shadow-lg mb-4">
-                                    <?php if (!empty($beneficiary['image']) && file_exists(WRITEPATH . 'uploads/beneficiaries/' . $beneficiary['image'])): ?>
-                                        <img src="<?= base_url('uploads/beneficiaries/' . $beneficiary['image']) ?>"
+                                    <?php if (!empty($beneficiary['image'])): ?>
+                                        <img src="<?= base_url('writable/uploads/beneficiaries/' . $beneficiary['image']) ?>"
                                              alt="<?= esc($beneficiary['name'] ?? 'Student') ?>" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-full object-cover"
+                                             onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-<?= $beneficiary[\'is_passout\'] ? \'emerald\' : \'indigo\' ?>-200 to-<?= $beneficiary[\'is_passout\'] ? \'green\' : \'purple\' ?>-200 flex items-center justify-center\'><i class=\'fas fa-user-graduate text-<?= $beneficiary[\'is_passout\'] ? \'emerald\' : \'indigo\' ?>-700 text-3xl\'></i></div>'">
                                     <?php else: ?>
                                         <div class="w-full h-full bg-gradient-to-br from-<?= $beneficiary['is_passout'] ? 'emerald' : 'indigo' ?>-200 to-<?= $beneficiary['is_passout'] ? 'green' : 'purple' ?>-200 flex items-center justify-center">
                                             <i class="fas fa-user-graduate text-<?= $beneficiary['is_passout'] ? 'emerald' : 'indigo' ?>-700 text-3xl"></i>
