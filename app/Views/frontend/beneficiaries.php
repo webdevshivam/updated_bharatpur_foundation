@@ -583,8 +583,7 @@ function viewBeneficiary(beneficiaryData) {
     }
 
     if (data.linkedin_url) {
-        const linkedInLink = document.getElementById('modalLinkedIn');
-        linkedInLink.href = data.linkedin_url;
+        document.getElementById('modalLinkedIn').href = data.linkedin_url;
         linkedInDiv.style.display = 'flex';
         hasContact = true;
     } else {
