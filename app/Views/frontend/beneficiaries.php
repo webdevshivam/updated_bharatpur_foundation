@@ -583,7 +583,8 @@ function viewBeneficiary(beneficiaryData) {
     }
 
     if (data.linkedin_url) {
-        document.getElementById('modalLinkedIn').href = data.linkedin_url;
+        const linkedInLink = document.getElementById('modalLinkedIn');
+        linkedInLink.href = data.linkedin_url;
         linkedInDiv.style.display = 'flex';
         hasContact = true;
     } else {
@@ -604,8 +605,8 @@ function viewBeneficiary(beneficiaryData) {
         document.getElementById('modalCompany').textContent = data.company_name;
 
         if (data.company_link) {
-            const companyLink = document.getElementById('modalCompanyLink');
-            companyLink.href = data.company_link;
+            const companyLinkElement = document.getElementById('modalCompanyLink');
+            companyLinkElement.href = data.company_link;
             companyLinkDiv.style.display = 'flex';
         } else {
             companyLinkDiv.style.display = 'none';
