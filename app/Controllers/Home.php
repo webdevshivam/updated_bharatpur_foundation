@@ -171,6 +171,85 @@ class Home extends BaseController
         return view('frontend/home', $data);
     }
 
+    public function activeBeneficiaries($lang = 'en')
+    {
+        $language = $this->setLanguage($lang);
+
+        $beneficiaryModel = new \App\Models\BeneficiaryModel();
+
+        // Get search parameter
+        $search = $this->request->getGet('search') ?? '';
+
+        // Get only active (pursuing) beneficiaries
+        $beneficiaries = $beneficiaryModel->getBeneficiariesByStatus(false, null, null, $search);
+
+        // Calculate stats
+        $total_beneficiaries = $beneficiaryModel->countAll();
+        $active_students = $beneficiaryModel->where('is_passout', 0)->where('status', 'active')->countAllResults();
+        $graduates = $beneficiaryModel->where('is_passout', 1)->where('status', 'active')->countAllResults();
+        $total_results = count($beneficiaries);
+
+        $pageTranslations = [
+            'en' => [
+                'page_title' => 'Active Students',
+                'beneficiaries_title' => 'Our Active Students',
+                'beneficiaries_subtitle' => 'Currently pursuing their education',
+                'beneficiaries_description' => 'Meet the amazing students who are currently pursuing their education with our support.',
+                'age' => 'Age',
+                'years_old' => 'years old',
+                'course' => 'Course',
+                'contact' => 'Contact',
+                'email' => 'Email',
+                'phone' => 'Phone',
+                'no_beneficiaries' => 'No active students available at the moment.',
+                'back_to_home' => 'Back to Home',
+                'search' => 'Search',
+                'active' => 'Active',
+                'active_student' => 'Active Student'
+            ],
+            'hi' => [
+                'page_title' => 'सक्रिय छात्र',
+                'beneficiaries_title' => 'हमारे सक्रिय छात्र',
+                'beneficiaries_subtitle' => 'वर्तमान में अपनी शिक्षा प्राप्त कर रहे हैं',
+                'beneficiaries_description' => 'उन अद्भुत छात्रों से मिलें जो वर्तमान में हमारी सहायता से अपनी शिक्षा प्राप्त कर रहे हैं।',
+                'age' => 'आयु',
+                'years_old' => 'साल की उम्र',
+                'course' => 'कोर्स',
+                'contact' => 'संपर्क',
+                'email' => 'ईमेल',
+                'phone' => 'फोन',
+                'no_beneficiaries' => 'फिलहाल कोई सक्रिय छात्र उपलब्ध नहीं है।',
+                'back_to_home' => 'होम पर वापस जाएं',
+                'search' => 'खोजें',
+                'active' => 'सक्रिय',
+                'active_student' => 'सक्रिय छात्र'
+            ]
+        ];
+
+        $allTranslations = array_merge($this->translations[$language], $pageTranslations[$language]);
+
+        $data = [
+            'title' => $pageTranslations[$language]['page_title'],
+            'beneficiaries' => $beneficiaries,
+            'pursuing_beneficiaries' => $beneficiaries,
+            'passout_beneficiaries' => [],
+            'total_beneficiaries' => $total_beneficiaries,
+            'active_students' => $active_students,
+            'graduates' => $graduates,
+            'institutions' => '10+',
+            'search' => $search ?? '',
+            'total_results' => $total_results,
+            'language' => $language,
+            'translations' => $allTranslations,
+            'page_title' => 'Active Students - Currently Pursuing',
+            'meta_description' => 'Meet our active students at Bharatpur Foundation. Discover students currently pursuing their education with our comprehensive support program.',
+            'meta_keywords' => 'bharatpur foundation students, active students, current students, pursuing education, scholarship students',
+            'show_only_active' => true
+        ];
+
+        return view('frontend/beneficiaries', $data);
+    }
+
     public function graduatedBeneficiaries($lang = 'en')
     {
         $language = $this->setLanguage($lang);
