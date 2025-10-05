@@ -339,18 +339,16 @@ function viewStory(title, content, studentName, date, image, position, company, 
     let hasLinks = false;
 
     if (linkedinUrl) {
-        const linkedInBtn = document.getElementById('storyModalLinkedIn');
-        linkedInBtn.href = linkedinUrl;
-        linkedInBtn.classList.remove('hidden');
+        document.getElementById('storyModalLinkedIn').href = linkedinUrl;
+        document.getElementById('storyModalLinkedIn').classList.remove('hidden');
         hasLinks = true;
     } else {
         document.getElementById('storyModalLinkedIn').classList.add('hidden');
     }
 
     if (companyLink) {
-        const companyBtn = document.getElementById('storyModalCompanyLink');
-        companyBtn.href = companyLink;
-        companyBtn.classList.remove('hidden');
+        document.getElementById('storyModalCompanyLink').href = companyLink;
+        document.getElementById('storyModalCompanyLink').classList.remove('hidden');
         hasLinks = true;
     } else {
         document.getElementById('storyModalCompanyLink').classList.add('hidden');
