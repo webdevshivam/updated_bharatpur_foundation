@@ -171,6 +171,85 @@ class Home extends BaseController
         return view('frontend/home', $data);
     }
 
+    public function graduatedBeneficiaries($lang = 'en')
+    {
+        $language = $this->setLanguage($lang);
+
+        $beneficiaryModel = new \App\Models\BeneficiaryModel();
+
+        // Get search parameter
+        $search = $this->request->getGet('search') ?? '';
+
+        // Get only graduated beneficiaries
+        $beneficiaries = $beneficiaryModel->getBeneficiariesByStatus(true, null, null, $search);
+
+        // Calculate stats
+        $total_beneficiaries = $beneficiaryModel->countAll();
+        $active_students = $beneficiaryModel->where('is_passout', 0)->where('status', 'active')->countAllResults();
+        $graduates = $beneficiaryModel->where('is_passout', 1)->where('status', 'active')->countAllResults();
+        $total_results = count($beneficiaries);
+
+        $pageTranslations = [
+            'en' => [
+                'page_title' => 'Graduated Students',
+                'beneficiaries_title' => 'Our Graduated Students',
+                'beneficiaries_subtitle' => 'Success stories of our alumni',
+                'beneficiaries_description' => 'Meet the amazing students who have successfully completed their education with our support and are now working professionals.',
+                'age' => 'Age',
+                'years_old' => 'years old',
+                'course' => 'Course',
+                'contact' => 'Contact',
+                'email' => 'Email',
+                'phone' => 'Phone',
+                'no_beneficiaries' => 'No graduated students available at the moment.',
+                'back_to_home' => 'Back to Home',
+                'search' => 'Search',
+                'graduated' => 'Graduated',
+                'graduate' => 'Graduate'
+            ],
+            'hi' => [
+                'page_title' => 'स्नातक छात्र',
+                'beneficiaries_title' => 'हमारे स्नातक छात्र',
+                'beneficiaries_subtitle' => 'हमारे पूर्व छात्रों की सफलता की कहानियां',
+                'beneficiaries_description' => 'उन अद्भुत छात्रों से मिलें जिन्होंने हमारी सहायता से अपनी शिक्षा सफलतापूर्वक पूरी की है और अब काम कर रहे पेशेवर हैं।',
+                'age' => 'आयु',
+                'years_old' => 'साल की उम्र',
+                'course' => 'कोर्स',
+                'contact' => 'संपर्क',
+                'email' => 'ईमेल',
+                'phone' => 'फोन',
+                'no_beneficiaries' => 'फिलहाल कोई स्नातक छात्र उपलब्ध नहीं है।',
+                'back_to_home' => 'होम पर वापस जाएं',
+                'search' => 'खोजें',
+                'graduated' => 'स्नातक',
+                'graduate' => 'स्नातक'
+            ]
+        ];
+
+        $allTranslations = array_merge($this->translations[$language], $pageTranslations[$language]);
+
+        $data = [
+            'title' => $pageTranslations[$language]['page_title'],
+            'beneficiaries' => $beneficiaries,
+            'pursuing_beneficiaries' => [],
+            'passout_beneficiaries' => $beneficiaries,
+            'total_beneficiaries' => $total_beneficiaries,
+            'active_students' => $active_students,
+            'graduates' => $graduates,
+            'institutions' => '10+',
+            'search' => $search ?? '',
+            'total_results' => $total_results,
+            'language' => $language,
+            'translations' => $allTranslations,
+            'page_title' => 'Graduated Students - Alumni',
+            'meta_description' => 'Meet our graduated students at Bharatpur Foundation. Discover inspiring success stories of alumni who have completed their education and are now working professionals.',
+            'meta_keywords' => 'bharatpur foundation graduates, alumni, graduated students, success stories, professional careers, completed education',
+            'show_only_graduated' => true
+        ];
+
+        return view('frontend/beneficiaries', $data);
+    }
+
     public function beneficiaries($lang = 'en')
     {
         $language = $this->setLanguage($lang);

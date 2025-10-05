@@ -66,6 +66,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
             <!-- Filter Buttons -->
+            <?php if (!isset($show_only_graduated) || !$show_only_graduated): ?>
             <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <button onclick="filterBeneficiaries('all')" 
                         class="filter-btn active bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
@@ -83,6 +84,14 @@
                     Graduates
                 </button>
             </div>
+            <?php else: ?>
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <span class="bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg">
+                    <i class="fas fa-medal mr-2"></i>
+                    Graduated Students Only
+                </span>
+            </div>
+            <?php endif; ?>
 
             <!-- Search Box -->
             <div class="relative w-full lg:w-auto">

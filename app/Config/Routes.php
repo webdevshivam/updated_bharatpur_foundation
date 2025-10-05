@@ -10,6 +10,8 @@ $routes->get('/en', 'Home::index/en');
 $routes->get('/hi', 'Home::index/hi');
 $routes->get('/en/beneficiaries', 'Home::beneficiaries/en');
 $routes->get('/hi/beneficiaries', 'Home::beneficiaries/hi');
+$routes->get('/en/beneficiaries/graduated', 'Home::graduatedBeneficiaries/en');
+$routes->get('/hi/beneficiaries/graduated', 'Home::graduatedBeneficiaries/hi');
 $routes->get('/en/success-stories', 'Home::success_stories/en');
 $routes->get('/hi/success-stories', 'Home::success_stories/hi');
 $routes->get('/en/ngo-works', 'Home::ngo_works/en');
@@ -21,6 +23,7 @@ $routes->get('/hi/join-us', 'Home::join_us/hi');
 
 // Frontend routes
 $routes->get('beneficiaries', 'Home::beneficiaries');
+$routes->get('beneficiaries/graduated', 'Home::graduatedBeneficiaries');
 $routes->get('beneficiaries/load-more', 'Home::loadMoreBeneficiaries');
 $routes->get('uploads/beneficiaries/(:any)', 'Home::serveBeneficiaryImage/$1');
 $routes->get('success-stories', 'Home::success_stories');
