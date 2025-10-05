@@ -15,6 +15,23 @@
     </div>
     <div class="card-body">
         <?php if (!empty($beneficiaries)): ?>
+            <!-- Search Bar -->
+            <div class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" 
+                           id="searchInput" 
+                           class="form-control" 
+                           placeholder="Search by name, course, institution, contact, or location..."
+                           onkeyup="searchBeneficiaries()">
+                </div>
+                <small class="text-muted mt-2 d-block">
+                    <span id="resultCount"><?= count($beneficiaries) ?></span> beneficiaries found
+                </small>
+            </div>
+            
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -98,6 +115,39 @@
 
 <script>
     var page_title = 'Manage Beneficiaries';
+
+    function searchBeneficiaries() {
+        const searchInput = document.getElementById('searchInput');
+        const filter = searchInput.value.toLowerCase();
+        const table = document.querySelector('.table-responsive table tbody');
+        const rows = table.getElementsByTagName('tr');
+        let visibleCount = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName('td');
+            let found = false;
+
+            // Search through all cells in the row
+            for (let j = 0; j < cells.length; j++) {
+                const cellText = cells[j].textContent || cells[j].innerText;
+                if (cellText.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        }
+
+        // Update result count
+        document.getElementById('resultCount').textContent = visibleCount;
+    }
 </script>
 
 <?= $this->endSection() ?>
