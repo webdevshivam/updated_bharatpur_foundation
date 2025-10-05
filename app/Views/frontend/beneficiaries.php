@@ -584,8 +584,13 @@ function viewBeneficiary(beneficiaryData) {
 
     if (data.linkedin_url && data.linkedin_url.trim() !== '') {
         const linkedInLink = document.getElementById('modalLinkedIn');
-        linkedInLink.href = data.linkedin_url;
-        linkedInLink.onclick = null; // Remove any existing click handlers
+        linkedInLink.setAttribute('href', data.linkedin_url);
+        linkedInLink.removeAttribute('onclick');
+        linkedInLink.onclick = function(e) {
+            e.stopPropagation();
+            window.open(this.getAttribute('href'), '_blank');
+            return false;
+        };
         linkedInDiv.style.display = 'flex';
         hasContact = true;
     } else {
@@ -607,8 +612,13 @@ function viewBeneficiary(beneficiaryData) {
 
         if (data.company_link && data.company_link.trim() !== '') {
             const companyLinkElement = document.getElementById('modalCompanyLink');
-            companyLinkElement.href = data.company_link;
-            companyLinkElement.onclick = null; // Remove any existing click handlers
+            companyLinkElement.setAttribute('href', data.company_link);
+            companyLinkElement.removeAttribute('onclick');
+            companyLinkElement.onclick = function(e) {
+                e.stopPropagation();
+                window.open(this.getAttribute('href'), '_blank');
+                return false;
+            };
             companyLinkDiv.style.display = 'flex';
         } else {
             companyLinkDiv.style.display = 'none';

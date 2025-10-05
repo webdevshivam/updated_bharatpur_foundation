@@ -340,8 +340,13 @@ function viewStory(title, content, studentName, date, image, position, company, 
 
     if (linkedinUrl && linkedinUrl.trim() !== '') {
         const linkedInBtn = document.getElementById('storyModalLinkedIn');
-        linkedInBtn.href = linkedinUrl;
-        linkedInBtn.onclick = null; // Remove any existing click handlers
+        linkedInBtn.setAttribute('href', linkedinUrl);
+        linkedInBtn.removeAttribute('onclick');
+        linkedInBtn.onclick = function(e) {
+            e.stopPropagation();
+            window.open(this.getAttribute('href'), '_blank');
+            return false;
+        };
         linkedInBtn.classList.remove('hidden');
         hasLinks = true;
     } else {
@@ -350,8 +355,13 @@ function viewStory(title, content, studentName, date, image, position, company, 
 
     if (companyLink && companyLink.trim() !== '') {
         const companyBtn = document.getElementById('storyModalCompanyLink');
-        companyBtn.href = companyLink;
-        companyBtn.onclick = null; // Remove any existing click handlers
+        companyBtn.setAttribute('href', companyLink);
+        companyBtn.removeAttribute('onclick');
+        companyBtn.onclick = function(e) {
+            e.stopPropagation();
+            window.open(this.getAttribute('href'), '_blank');
+            return false;
+        };
         companyBtn.classList.remove('hidden');
         hasLinks = true;
     } else {
