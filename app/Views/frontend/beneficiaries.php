@@ -582,8 +582,10 @@ function viewBeneficiary(beneficiaryData) {
         emailDiv.style.display = 'none';
     }
 
-    if (data.linkedin_url) {
-        document.getElementById('modalLinkedIn').href = data.linkedin_url;
+    if (data.linkedin_url && data.linkedin_url.trim() !== '') {
+        const linkedInLink = document.getElementById('modalLinkedIn');
+        linkedInLink.href = data.linkedin_url;
+        linkedInLink.onclick = null; // Remove any existing click handlers
         linkedInDiv.style.display = 'flex';
         hasContact = true;
     } else {
@@ -603,8 +605,10 @@ function viewBeneficiary(beneficiaryData) {
     if (data.company_name && data.is_passout) {
         document.getElementById('modalCompany').textContent = data.company_name;
 
-        if (data.company_link) {
-            document.getElementById('modalCompanyLink').href = data.company_link;
+        if (data.company_link && data.company_link.trim() !== '') {
+            const companyLinkElement = document.getElementById('modalCompanyLink');
+            companyLinkElement.href = data.company_link;
+            companyLinkElement.onclick = null; // Remove any existing click handlers
             companyLinkDiv.style.display = 'flex';
         } else {
             companyLinkDiv.style.display = 'none';

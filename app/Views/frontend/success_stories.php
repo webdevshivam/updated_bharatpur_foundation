@@ -338,17 +338,21 @@ function viewStory(title, content, studentName, date, image, position, company, 
     const linksSection = document.getElementById('storyModalLinks');
     let hasLinks = false;
 
-    if (linkedinUrl) {
-        document.getElementById('storyModalLinkedIn').href = linkedinUrl;
-        document.getElementById('storyModalLinkedIn').classList.remove('hidden');
+    if (linkedinUrl && linkedinUrl.trim() !== '') {
+        const linkedInBtn = document.getElementById('storyModalLinkedIn');
+        linkedInBtn.href = linkedinUrl;
+        linkedInBtn.onclick = null; // Remove any existing click handlers
+        linkedInBtn.classList.remove('hidden');
         hasLinks = true;
     } else {
         document.getElementById('storyModalLinkedIn').classList.add('hidden');
     }
 
-    if (companyLink) {
-        document.getElementById('storyModalCompanyLink').href = companyLink;
-        document.getElementById('storyModalCompanyLink').classList.remove('hidden');
+    if (companyLink && companyLink.trim() !== '') {
+        const companyBtn = document.getElementById('storyModalCompanyLink');
+        companyBtn.href = companyLink;
+        companyBtn.onclick = null; // Remove any existing click handlers
+        companyBtn.classList.remove('hidden');
         hasLinks = true;
     } else {
         document.getElementById('storyModalCompanyLink').classList.add('hidden');
