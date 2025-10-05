@@ -24,8 +24,7 @@
                     <input type="text" 
                            id="searchInput" 
                            class="form-control" 
-                           placeholder="Search by name, course, institution, contact, or location..."
-                           onkeyup="searchBeneficiaries()">
+                           placeholder="Search by name, course, institution, contact, or location...">
                 </div>
                 <small class="text-muted mt-2 d-block">
                     <span id="resultCount"><?= count($beneficiaries) ?></span> beneficiaries found
@@ -116,38 +115,44 @@
 <script>
     var page_title = 'Manage Beneficiaries';
 
-    function searchBeneficiaries() {
+    // Attach search event listener when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
-        const filter = searchInput.value.toLowerCase();
-        const table = document.querySelector('.table-responsive table tbody');
-        const rows = table.getElementsByTagName('tr');
-        let visibleCount = 0;
+        
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function() {
+                const filter = this.value.toLowerCase();
+                const table = document.querySelector('.table-responsive table tbody');
+                const rows = table.getElementsByTagName('tr');
+                let visibleCount = 0;
 
-        for (let i = 0; i < rows.length; i++) {
-            const row = rows[i];
-            const cells = row.getElementsByTagName('td');
-            let found = false;
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let found = false;
 
-            // Search through all cells in the row
-            for (let j = 0; j < cells.length; j++) {
-                const cellText = cells[j].textContent || cells[j].innerText;
-                if (cellText.toLowerCase().indexOf(filter) > -1) {
-                    found = true;
-                    break;
+                    // Search through all cells in the row
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent || cells[j].innerText;
+                        if (cellText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
                 }
-            }
 
-            if (found) {
-                row.style.display = '';
-                visibleCount++;
-            } else {
-                row.style.display = 'none';
-            }
+                // Update result count
+                document.getElementById('resultCount').textContent = visibleCount;
+            });
         }
-
-        // Update result count
-        document.getElementById('resultCount').textContent = visibleCount;
-    }
+    });
 </script>
 
 <?= $this->endSection() ?>
